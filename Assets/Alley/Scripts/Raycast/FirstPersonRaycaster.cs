@@ -32,10 +32,12 @@ public class FirstPersonRaycaster : MonoBehaviour
             return;
         }
 
-        if(current != null)
+        // If we reach this far, we're not hovering an interactable anymore
+        if (current)
         {
             current.StopInteract();
-            OnHoveredObjectHovered?.Invoke(false);
         }
+        OnHoveredObjectHovered?.Invoke(false);
+        current = null;
     }
 }

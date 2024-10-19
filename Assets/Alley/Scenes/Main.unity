@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a637952277cc12458189a3d633454f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 0
+  minDistance: 1
   timeInteract: 2
 --- !u!65 &1415339978
 BoxCollider:

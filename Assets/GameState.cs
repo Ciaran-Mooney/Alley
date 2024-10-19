@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameState : MonoBehaviour
+public class GameState : MonoBehaviour
 {
     /// <summary>
     ///     What day is it.
