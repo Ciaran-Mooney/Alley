@@ -5,8 +5,6 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
-    [Header("Dialogue UI Elements")]
-    public Canvas dialogueCanvas;           // The canvas that contains the dialogue UI
     public TextMeshProUGUI dialogueText;    // The TextMeshPro text component
 
     [Header("Settings")]
@@ -19,7 +17,7 @@ public class DialogueManager : MonoBehaviour
     void Start()
     {
         dialogues = new Queue<string>();
-        dialogueCanvas.enabled = false;     // Hide dialogue canvas at the start
+        dialogueText.enabled = false;     // Hide dialogue canvas at the start
     }
 
     void Update()
@@ -37,7 +35,7 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueLines">A list of dialogue strings to display.</param>
     public void StartDialogue(List<string> dialogueLines)
     {
-        dialogueCanvas.enabled = true;      // Show the dialogue canvas
+        dialogueText.enabled = true;      // Show the dialogue canvas
         dialogues.Clear();
 
         foreach (string line in dialogueLines)
@@ -54,7 +52,7 @@ public class DialogueManager : MonoBehaviour
     /// <param name="dialogueLine">A dialogue string to display.</param>
     public void StartDialogue(string dialogueLine)
     {
-        dialogueCanvas.enabled = true;      // Show the dialogue canvas
+        dialogueText.enabled = true;      // Show the dialogue canvas
         dialogues.Clear();
 
         dialogues.Enqueue(dialogueLine);
@@ -69,7 +67,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogues.Count == 0)
         {
-            dialogueCanvas.enabled = false; // Hide canvas if no dialogues are left
+            dialogueText.enabled = false; // Hide canvas if no dialogues are left
             return;
         }
 

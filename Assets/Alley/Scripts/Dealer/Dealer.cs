@@ -23,7 +23,7 @@ public class Dealer : FPSInteractable
 
     private void Awake()
     {
-        minDistance = 1;
+        //minDistance = ;
     }
 
     public override void Interact()
@@ -65,8 +65,9 @@ public class Dealer : FPSInteractable
 
     public override bool IsInteractable()
     {
-        return GameState.mission == Mission.None 
-        || GameState.missionState == MissionState.Completed;
+        return GameState.mission == Mission.None
+         || GameState.mission == Mission.Freebie
+         || GameState.missionState == MissionState.Completed;
     }
 
     private void SetMission()
