@@ -16,7 +16,7 @@ namespace KinematicCharacterController.Walkthrough.Crouching
         public float yRotationLimit = 88f;
         Vector2 rotation = Vector2.zero;
         Quaternion cameraRot = Quaternion.identity;
-
+        float yOffset = -90;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -26,6 +26,8 @@ namespace KinematicCharacterController.Walkthrough.Crouching
 
         private void Start()
         {
+           
+
             Cursor.lockState = CursorLockMode.Locked;
 
             // Tell camera to follow transform

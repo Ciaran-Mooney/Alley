@@ -8,7 +8,7 @@ public class Dealer : FPSInteractable
 
     public List<string> missionIntro = new(){
         "First one's on the house.",
-        "Piss on a homeless person.",
+        "Piss on the homeless.",
         "Feed me a cat."
     };
 
@@ -19,6 +19,7 @@ public class Dealer : FPSInteractable
     DialogueManager dialogueManager; 
     public float timeInteract = 0;
     bool isInteracting;
+    bool giveDrug = false;
 
     public GameObject drugPrefab;
 
@@ -47,9 +48,10 @@ public class Dealer : FPSInteractable
 
             if(GameState.day == 0){
                 dialogueManager.StartDialogue(missionIntro[0]);
-                GiveDrug();
+                giveDrug = true;
                 GameState.day++;
                 SetMission();
+                CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, 0));
                 return;
             }
 
@@ -61,9 +63,10 @@ public class Dealer : FPSInteractable
             // give him the drug
 
             dialogueManager.StartDialogue(TakeThis);
-            GiveDrug();
+            giveDrug = true;
             GameState.day++;
             SetMission();
+            CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, 0));
             return;
             // reset the mission state
             // return;
@@ -71,12 +74,15 @@ public class Dealer : FPSInteractable
 
         // Do the dialog for either the intro to the mission or remind the player of the mission
         dialogueManager.StartDialogue(missionIntro[GameState.day]);
+
+        CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, 0));
     }
 
     public void GiveDrug()
     {
         GameObject go = Instantiate(drugPrefab, Vector3.zero, Quaternion.identity, GameObject.FindGameObjectWithTag("Player").transform);
         go.transform.localPosition = new Vector3(-0.4f, 1.28f, 0.409f);
+        go.transform.localRotation = Quaternion.Euler(0, 121.76f, 0);
     }
 
     // public void SetMission(){
@@ -103,16 +109,21 @@ public class Dealer : FPSInteractable
     private void OnFinishInteracted()
     {
         isInteracting = false;
-        
+        if (giveDrug)
+        {
+            GiveDrug();
+            giveDrug = false;
+        }
+
         // if the player has not started a mission
-        if(GameState.mission == Mission.None)
-        {
-            SetMission();
-        }
-        else
-        {
-            GiveDrugs();
-        }
+        //if(GameState.mission == Mission.None)
+        //{
+        //    SetMission();
+        //}
+        //else
+        //{
+        //    GiveDrugs();
+        //}
     }
 
     public override bool IsInteractable()

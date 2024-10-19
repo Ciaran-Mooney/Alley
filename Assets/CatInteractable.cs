@@ -60,6 +60,6 @@ public class CatInteractable : FPSInteractable
 
     public override bool IsInteractable()
     {
-        return GameState.mission == Mission.Cat;
+        return GameState.mission == Mission.Cat && GameState.missionState == MissionState.Active;
     }
 }

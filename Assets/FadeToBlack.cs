@@ -37,7 +37,7 @@ public class FadeToBlack : MonoBehaviour
         // Optional: Wait for a moment while the screen is black
         yield return new WaitForSeconds(1.0f);
 
-        GameObject.FindGameObjectWithTag("Player").GetComponent<KinematicCharacterMotor>().SetPositionAndRotation(new Vector3(-569.208f, 0.5f, 5f), Quaternion.Euler(new Vector3(0, -100, 0)));
+        GameObject.FindGameObjectWithTag("Player").GetComponent<KinematicCharacterMotor>().SetPositionAndRotation(new Vector3(436.2895f, 0.06860161f, 889.0636f), Quaternion.Euler(new Vector3(0, -100, 0)));
 
         yield return new WaitForSeconds(1.0f);
 
