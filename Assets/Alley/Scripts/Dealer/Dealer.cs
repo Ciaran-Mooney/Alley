@@ -19,7 +19,8 @@ public class Dealer : FPSInteractable
     DialogueManager dialogueManager; 
     public float timeInteract = 0;
     bool isInteracting;
-    
+
+    public GameObject drugPrefab;
 
     void Start()
     {
@@ -46,7 +47,7 @@ public class Dealer : FPSInteractable
 
             if(GameState.day == 0){
                 dialogueManager.StartDialogue(missionIntro[0]);
-                // give the drug
+                GiveDrug();
                 GameState.day++;
                 SetMission();
                 return;
@@ -60,6 +61,7 @@ public class Dealer : FPSInteractable
             // give him the drug
 
             dialogueManager.StartDialogue(TakeThis);
+            GiveDrug();
             GameState.day++;
             SetMission();
             return;
@@ -69,6 +71,12 @@ public class Dealer : FPSInteractable
 
         // Do the dialog for either the intro to the mission or remind the player of the mission
         dialogueManager.StartDialogue(missionIntro[GameState.day]);
+    }
+
+    public void GiveDrug()
+    {
+        GameObject go = Instantiate(drugPrefab, Vector3.zero, Quaternion.identity, GameObject.FindGameObjectWithTag("Player").transform);
+        go.transform.localPosition = new Vector3(-0.4f, 1.28f, 0.409f);
     }
 
     // public void SetMission(){

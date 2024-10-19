@@ -19,15 +19,13 @@ public class DrugInteractable : FPSInteractable
         isInteracting = true;
 
         // fade to black
-
-        // reset mission type
-
-        // hear syringe noise
+        FadeToBlack.instance.Fade();
 
         //AudioManager.Instance.Play(BoreholeAudioType.Drill);
         //isInteracting = true;
         CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, timeInteract));
 
+        this.gameObject.SetActive(false);
     }
 
     public override void StopInteract()
@@ -36,18 +34,11 @@ public class DrugInteractable : FPSInteractable
         {
             return;
         }
-        isInteracting = false;
         CanvasElements.Instance.m_interactBar.StopInteracting();
     }
 
     private void OnFinishInteracted()
     {
-
-        // tp to bed
-
-        // wake up
-
-        isInteracting = false;
         Destroy(this.gameObject);
     }
 

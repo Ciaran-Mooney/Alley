@@ -6,8 +6,15 @@ using UnityEngine;
 public class FirstPersonRaycaster : MonoBehaviour
 {
     [SerializeField]
-    private FPSInteractable current;
+    public FPSInteractable current;
     public static Action<bool> OnHoveredObjectHovered;
+
+    public static FirstPersonRaycaster singleton;
+
+    private void Awake()
+    {
+        singleton = this;
+    }
 
     // Update is called once per frame
     void Update()
