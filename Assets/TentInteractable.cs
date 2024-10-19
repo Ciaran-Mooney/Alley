@@ -2,16 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineralNode : FPSInteractable
+public class TentInteractable : FPSInteractable
 {
-    public float timeInteract = 10;
-    bool isInteracting;
-
-    private void Awake()
-    {
-        minDistance = 1;
-    }
-
+    float timeInteract = 5;
+    bool isInteracting = false;
     public override void Interact()
     {
 
@@ -27,33 +21,17 @@ public class MineralNode : FPSInteractable
 
     public override void StopInteract()
     {
-        if (!isInteracting)
-        {
-            return;
-        }
-        isInteracting = false;
-        CanvasElements.Instance.m_interactBar.StopInteracting();
     }
 
     private void OnFinishInteracted()
     {
         isInteracting = false;
-        Destroy(this.gameObject);
+        GameState.missionState = MissionState.Completed;
         //AudioManager.Instance.Stop(BoreholeAudioType.Drill);
     }
 
     public override bool IsInteractable()
     {
-        return true;
+        return GameState.mission == Mission.Piss;
     }
-}
-
-public abstract class FPSInteractable : MonoBehaviour
-{
-    public float minDistance;
-    public bool isHeld;
-    
-    public abstract bool IsInteractable();
-    public abstract void Interact();
-    public abstract void StopInteract();
 }

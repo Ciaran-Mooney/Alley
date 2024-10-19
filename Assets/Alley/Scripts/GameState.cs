@@ -22,7 +22,7 @@ public static class GameState
     /// <summary>
     ///     Object currently held in the players hands
     /// </summary>
-    public static HeldObject heldObject = HeldObject.None;
+    public static FPSInteractable heldObject = null;
 
     /// <summary>
     ///     The current state of the player.

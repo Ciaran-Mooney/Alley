@@ -2,25 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MineralNode : FPSInteractable
+public class DrugInteractable : FPSInteractable
 {
-    public float timeInteract = 10;
-    bool isInteracting;
+    // how long you take for before you wake up 
+    public float timeInteract;
+    public bool isInteracting;
 
-    private void Awake()
-    {
-        minDistance = 1;
-    }
-
-    public override void Interact()
+   public override void Interact()
     {
 
+        // dont want to take the drug more than once per time
         if (isInteracting)
         {
             return;
         }
-        //AudioManager.Instance.Play(BoreholeAudioType.Drill);
         isInteracting = true;
+
+        // fade to black
+
+        // reset mission type
+
+        // hear syringe noise
+
+        //AudioManager.Instance.Play(BoreholeAudioType.Drill);
+        //isInteracting = true;
         CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, timeInteract));
 
     }
@@ -37,23 +42,17 @@ public class MineralNode : FPSInteractable
 
     private void OnFinishInteracted()
     {
+
+        // tp to bed
+
+        // wake up
+
         isInteracting = false;
         Destroy(this.gameObject);
-        //AudioManager.Instance.Stop(BoreholeAudioType.Drill);
     }
 
     public override bool IsInteractable()
     {
         return true;
     }
-}
-
-public abstract class FPSInteractable : MonoBehaviour
-{
-    public float minDistance;
-    public bool isHeld;
-    
-    public abstract bool IsInteractable();
-    public abstract void Interact();
-    public abstract void StopInteract();
 }

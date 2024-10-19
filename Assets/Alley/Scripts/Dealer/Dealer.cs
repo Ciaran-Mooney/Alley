@@ -1,13 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Dealer : FPSInteractable
 {
-    // dialog
-    public static string Intro = "First one's on the house.";
-    public static string PissOnHomeless = "Piss on a homeless person.";
-    public static string FeedMeCat = "Feed me a cat.";
+
+    public List<string> missionIntro = new(){
+        "First one's on the house.",
+        "Piss on a homeless person.",
+        "Feed me a cat."
+    };
+
     public static string TakeThis = "Take this.";
     public static string HaveIt = "Have it.";
 
@@ -15,6 +19,7 @@ public class Dealer : FPSInteractable
     DialogueManager dialogueManager; 
     public float timeInteract = 0;
     bool isInteracting;
+    
 
     void Start()
     {
@@ -23,7 +28,7 @@ public class Dealer : FPSInteractable
 
     private void Awake()
     {
-        //minDistance = ;
+        GameState.missionState = MissionState.Completed;
     }
 
     public override void Interact()
@@ -34,9 +39,48 @@ public class Dealer : FPSInteractable
             return;
         }
         isInteracting = true;
+  
+        // Give the drug, thats it
+        if(GameState.missionState == MissionState.Completed)
+        {
 
-        dialogueManager.StartDialogue(Intro);
+            if(GameState.day == 0){
+                dialogueManager.StartDialogue(missionIntro[0]);
+                // give the drug
+                GameState.day++;
+                SetMission();
+                return;
+            }
+
+            if(GameState.heldObject != null)
+            {
+                Destroy(GameState.heldObject.gameObject);
+            }
+
+            // give him the drug
+
+            dialogueManager.StartDialogue(TakeThis);
+            GameState.day++;
+            SetMission();
+            return;
+            // reset the mission state
+            // return;
+        }
+
+        // Do the dialog for either the intro to the mission or remind the player of the mission
+        dialogueManager.StartDialogue(missionIntro[GameState.day]);
     }
+
+    // public void SetMission(){
+    //     // Piss on tent
+    //     if(missionIndex == 1){
+    //         // make tent interactable
+    //     }
+    //     // Take cat
+    //     else if(missionIndex == 2){
+    //         // make cat interactable
+    //     }
+    // }
 
     public override void StopInteract()
     {
@@ -65,13 +109,12 @@ public class Dealer : FPSInteractable
 
     public override bool IsInteractable()
     {
-        return GameState.mission == Mission.None
-         || GameState.mission == Mission.Freebie
-         || GameState.missionState == MissionState.Completed;
+        return true;
     }
 
     private void SetMission()
     {
+        GameState.missionState = MissionState.Active;
         switch(GameState.day)
         {
             case 0:
@@ -80,10 +123,12 @@ public class Dealer : FPSInteractable
 
             case 1:
                 GameState.mission = Mission.Piss;
+                // todo: make tent interactable
                 break;
 
             case 2:
                 GameState.mission = Mission.Cat;
+                // todo: make cat interactable
                 break;
             
             case 3:
@@ -95,6 +140,6 @@ public class Dealer : FPSInteractable
     private void GiveDrugs()
     {
         GameState.mission = Mission.None;
-        GameState.heldObject = HeldObject.Drugs;
+        //GameState.heldObject = HeldObject.Drugs;
     }
 }
