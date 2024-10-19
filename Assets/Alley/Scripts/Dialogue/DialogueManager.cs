@@ -49,6 +49,20 @@ public class DialogueManager : MonoBehaviour
     }
 
     /// <summary>
+    ///     Starts a dialogue.
+    /// </summary>
+    /// <param name="dialogueLine">A dialogue string to display.</param>
+    public void StartDialogue(string dialogueLine)
+    {
+        dialogueCanvas.enabled = true;      // Show the dialogue canvas
+        dialogues.Clear();
+
+        dialogues.Enqueue(dialogueLine);
+
+        DisplayNextDialogue();
+    }
+
+    /// <summary>
     /// Displays the next dialogue in the queue.
     /// </summary>
     void DisplayNextDialogue()

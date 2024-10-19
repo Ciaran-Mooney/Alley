@@ -15,6 +15,11 @@ public static class GameState
     public static Mission mission = Mission.Freebie;
 
     /// <summary>
+    ///     To indicate what section of the mission the player is on.
+    /// </summary>
+    public static MissionState missionState = MissionState.Pre;
+
+    /// <summary>
     ///     Object currently held in the players hands
     /// </summary>
     public static HeldObject heldObject = HeldObject.None;
@@ -43,6 +48,13 @@ public enum Mission
     Piss,
     Cat,
     None
+}
+
+public enum MissionState
+{
+    Pre,
+    Active,
+    Completed
 }
 
 
