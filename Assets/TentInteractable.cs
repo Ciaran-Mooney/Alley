@@ -16,7 +16,6 @@ public class TentInteractable : FPSInteractable
         //AudioManager.Instance.Play(BoreholeAudioType.Drill);
         isInteracting = true;
         CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, timeInteract));
-
     }
 
     public override void StopInteract()
@@ -32,6 +31,6 @@ public class TentInteractable : FPSInteractable
 
     public override bool IsInteractable()
     {
-        return GameState.mission == Mission.Piss;
+        return GameState.hasTalked && GameState.mission == Mission.Piss;
     }
 }

@@ -12,7 +12,7 @@ public class Dealer : FPSInteractable
         "Feed me a cat."
     };
 
-    public static string TakeThis = "Take this.";
+    public static string TakeThis = "Take it.";
     public static string HaveIt = "Have it.";
 
 
@@ -41,11 +41,12 @@ public class Dealer : FPSInteractable
             return;
         }
         isInteracting = true;
-  
+        GameState.hasTalked = true;
+
         // Give the drug, thats it
         if(GameState.missionState == MissionState.Completed)
         {
-
+            GameState.hasTalked = false;
             if(GameState.day == 0){
                 dialogueManager.StartDialogue(missionIntro[0]);
                 giveDrug = true;

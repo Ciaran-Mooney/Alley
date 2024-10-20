@@ -34,7 +34,7 @@ public class CatInteractable : FPSInteractable
         //AudioManager.Instance.Play(BoreholeAudioType.Drill);
         //isInteracting = true;
 
-        
+
         // below code is necessary but badly done
         CanvasElements.Instance.m_interactBar.StartInteracting(new InteractBar.InteractParameters(OnFinishInteracted, 0));
 
@@ -60,6 +60,6 @@ public class CatInteractable : FPSInteractable
 
     public override bool IsInteractable()
     {
-        return GameState.mission == Mission.Cat && GameState.missionState == MissionState.Active;
+        return GameState.mission == Mission.Cat && GameState.hasTalked && GameState.missionState == MissionState.Active;
     }
 }
